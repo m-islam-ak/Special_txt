@@ -11,67 +11,96 @@
             font-family: Arial, sans-serif;
             color: white;
             text-align: center;
+            overflow: hidden;
         }
 
         .overlay {
-            background: rgba(0,0,0,0.6);
+            background: rgba(0,0,0,0.7);
             height: 100vh;
             width: 100%;
             position: absolute;
             top: 0;
             left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .content {
-            position: relative;
-            top: 25%;
             padding: 20px;
+            max-width: 80%;
         }
 
         h2 {
             line-height: 1.6;
+            font-size: 24px;
+        }
+
+        .start-btn {
+            background-color: #ff4b2b;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .start-btn:hover {
+            background-color: #ff416c;
+            transform: scale(1.05);
         }
     </style>
 
     <script>
-        function askName() {
-            let name = prompt("What's your husband's name?");
+        function startExperience() {
             let audio = document.getElementById("bgMusic");
-
-            // Play the song "Alo" after the user interacts with the prompt
-            if (audio) {
-                audio.volume = 0.5; // Set volume to 50%
-                audio.play().catch(e => console.log("Audio play prevented by browser. Click anywhere to play."));
-            }
             
-            if (!name) return;
+            // Play audio first to satisfy browser requirements
+            audio.play().catch(e => console.log("Audio play failed"));
 
-            name = name.toLowerCase();
+            // Hide the button and start the logic
+            document.getElementById("btnContainer").style.display = "none";
 
-            if (name.includes("anik") || name.includes("mahmudul") || name.includes("islam")) {
-                document.getElementById("message").innerHTML = `
-                    What hurt the most wasn’t just the situation…<br><br>
-                    it was you choosing to spend Pohela Boishakh with someone else, while knowing I cared about you.<br><br>
-                    You could’ve handled it differently, but you didn’t.
-                `;
-            } else {
-                document.getElementById("message").innerHTML = `
-                    I thought I am your husband and you will write anik.
-                `;
-            }
+            setTimeout(() => {
+                let name = prompt("What's your husband's name?");
+                
+                if (!name) {
+                    document.getElementById("message").innerHTML = "Please refresh and enter a name.";
+                    return;
+                }
+
+                name = name.toLowerCase();
+
+                if (name.includes("anik") || name.includes("mahmudul") || name.includes("islam")) {
+                    document.getElementById("message").innerHTML = `
+                        What hurt the most wasn’t just the situation…<br><br>
+                        it was you choosing to spend Pohela Boishakh with someone else, while knowing I cared about you.<br><br>
+                        You could’ve handled it differently, but you didn’t.
+                    `;
+                } else {
+                    document.getElementById("message").innerHTML = `
+                        i thought i am your husband and you will write anik.
+                    `;
+                }
+            }, 100);
         }
     </script>
 </head>
 
-<body onload="askName()">
+<body>
     <div class="overlay">
         <div class="content">
+            <div id="btnContainer">
+                <button class="start-btn" onclick="startExperience()">Click to Open ❤️</button>
+            </div>
             <h2 id="message"></h2>
 
             <audio id="bgMusic" loop>
-                <source src="https://www.dropbox.com/scl/fi/v6i36v3r8f8w5q2/Tahsan-Alo.mp3?rlkey=7j9x3v7k8l9m0n1p2q3r4s5t6&raw=1" type="audio/mpeg">
-                Your browser does not support the audio element.
-            </audio>
+                <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+                </audio>
         </div>
     </div>
 </body>
