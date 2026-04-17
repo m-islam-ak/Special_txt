@@ -7,68 +7,66 @@
         body {
             margin: 0;
             padding: 0;
-            background: url('https://wallpaperaccess.com/full/1462767.jpg') no-repeat center center/cover;
-            font-family: Arial, sans-serif;
+            /* Using a darker overlay on the background for better text readability */
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://wallpaperaccess.com/full/1462767.jpg') no-repeat center center/cover;
+            background-attachment: fixed;
+            font-family: 'Segoe UI', Arial, sans-serif;
             color: white;
             text-align: center;
-            overflow: hidden;
-        }
-
-        .overlay {
-            background: rgba(0,0,0,0.7);
             height: 100vh;
-            width: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
         .content {
-            padding: 20px;
-            max-width: 80%;
+            padding: 30px;
+            max-width: 600px;
+            z-index: 10;
         }
 
         h2 {
-            line-height: 1.6;
-            font-size: 24px;
+            line-height: 1.8;
+            font-weight: 300;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
 
         .start-btn {
-            background-color: #ff4b2b;
+            background: #e91e63;
             color: white;
             border: none;
-            padding: 15px 30px;
-            font-size: 18px;
-            border-radius: 50px;
+            padding: 15px 40px;
+            font-size: 20px;
+            border-radius: 30px;
             cursor: pointer;
+            box-shadow: 0 4px 15px rgba(233, 30, 99, 0.4);
             transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
 
         .start-btn:hover {
-            background-color: #ff416c;
-            transform: scale(1.05);
+            background: #c2185b;
+            transform: translateY(-2px);
         }
     </style>
 
     <script>
-        function startExperience() {
-            let audio = document.getElementById("bgMusic");
+        function startApp() {
+            const audio = document.getElementById("bgMusic");
+            const btn = document.getElementById("startBtn");
             
-            // Play audio first to satisfy browser requirements
-            audio.play().catch(e => console.log("Audio play failed"));
+            // 1. Play Audio (This works now because of the click)
+            audio.play().catch(err => console.log("Audio failed:", err));
+            
+            // 2. Hide Button
+            btn.style.display = "none";
 
-            // Hide the button and start the logic
-            document.getElementById("btnContainer").style.display = "none";
-
+            // 3. Small delay then ask name
             setTimeout(() => {
                 let name = prompt("What's your husband's name?");
                 
                 if (!name) {
-                    document.getElementById("message").innerHTML = "Please refresh and enter a name.";
+                    document.getElementById("message").innerHTML = "Please refresh to try again.";
                     return;
                 }
 
@@ -85,23 +83,20 @@
                         i thought i am your husband and you will write anik.
                     `;
                 }
-            }, 100);
+            }, 500);
         }
     </script>
 </head>
 
 <body>
-    <div class="overlay">
-        <div class="content">
-            <div id="btnContainer">
-                <button class="start-btn" onclick="startExperience()">Click to Open ❤️</button>
-            </div>
-            <h2 id="message"></h2>
+    <div class="content">
+        <button id="startBtn" class="start-btn" onclick="startApp()">Click to Open ❤️</button>
+        <h2 id="message"></h2>
 
-            <audio id="bgMusic" loop>
-                <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
-                </audio>
-        </div>
+        <audio id="bgMusic" loop>
+            <source src="https://files.catbox.moe/kixhsm.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
     </div>
 </body>
 </html>
