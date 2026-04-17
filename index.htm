@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Just a Question ❤️</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: url('https://wallpaperaccess.com/full/1462767.jpg') no-repeat center center/cover;
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+        }
+
+        .overlay {
+            background: rgba(0,0,0,0.6);
+            height: 100vh;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .content {
+            position: relative;
+            top: 25%;
+            padding: 20px;
+        }
+
+        h2 {
+            line-height: 1.6;
+        }
+
+        iframe {
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+    </style>
+
+    <script>
+        function askName() {
+            let name = prompt("What's your husband name?");
+            
+            if (!name) return;
+
+            name = name.toLowerCase();
+
+            if (name.includes("anik") || name.includes("mahmudul") || name.includes("islam")) {
+                document.getElementById("message").innerHTML = `
+                    What hurt the most wasn’t just the situation…<br><br>
+                    it was you choosing to spend Pohela Boishakh with someone else, while knowing I cared about you.<br><br>
+                    You could’ve handled it differently, but you didn’t.
+                `;
+            } else {
+                document.getElementById("message").innerHTML = `
+                    Hmm... that doesn't seem right 🤨
+                `;
+            }
+        }
+    </script>
+</head>
+
+<body onload="askName()">
+    <div class="overlay">
+        <div class="content">
+            <h2 id="message"></h2>
+
+            <!-- 🎵 Tahsan - Alo (YouTube Embed) -->
+            <iframe width="300" height="170"
+                src="https://www.youtube.com/embed/1Cw1ng75KP0"
+                title="Alo - Tahsan"
+                allow="autoplay; encrypted-media"
+                allowfullscreen>
+            </iframe>
+        </div>
+    </div>
+</body>
+</html>
