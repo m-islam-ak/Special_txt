@@ -54,20 +54,23 @@
             const audio = document.getElementById("bgMusic");
             const btn = document.getElementById("startBtn");
 
-            // Ensure audio is ready
+            // Load + play audio
             audio.load();
 
             audio.play()
-                .then(() => console.log("Audio playing"))
+                .then(() => {
+                    console.log("Audio playing");
+                    audio.volume = 0.3; // soft sad background
+                })
                 .catch(err => {
-                    alert("Audio failed to play. Check file path or browser settings.");
+                    alert("Audio failed. Try another browser.");
                     console.log(err);
                 });
 
             // Hide button
             btn.style.display = "none";
 
-            // Ask name after slight delay
+            // Ask name after delay
             setTimeout(() => {
                 let name = prompt("What's your husband's name?");
                 
@@ -99,9 +102,9 @@
         <button id="startBtn" class="start-btn" onclick="startApp()">Click to Open ❤️</button>
         <h2 id="message"></h2>
 
-        <!-- IMPORTANT: Use LOCAL audio file -->
+        <!-- FREE sad background music (no download needed) -->
         <audio id="bgMusic" loop preload="auto">
-            <source src="audio/music.mp3" type="audio/mpeg">
+            <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3?filename=sad-piano-ambient-110624.mp3" type="audio/mpeg">
             Your browser does not support the audio element.
         </audio>
     </div>
