@@ -7,7 +7,7 @@
         body {
             margin: 0;
             padding: 0;
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
                         url('https://wallpaperaccess.com/full/1462767.jpg') no-repeat center center/cover;
             background-attachment: fixed;
             font-family: 'Segoe UI', Arial, sans-serif;
@@ -17,6 +17,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow: hidden;
         }
 
         .content {
@@ -28,24 +29,32 @@
         h2 {
             line-height: 1.8;
             font-weight: 300;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+            font-size: 22px;
         }
 
         .start-btn {
             background: #e91e63;
             color: white;
             border: none;
-            padding: 15px 40px;
+            padding: 18px 45px;
             font-size: 20px;
-            border-radius: 30px;
+            border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(233, 30, 99, 0.4);
-            transition: 0.3s;
+            box-shadow: 0 4px 20px rgba(233, 30, 99, 0.5);
+            transition: 0.4s;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
 
         .start-btn:hover {
             background: #c2185b;
-            transform: translateY(-2px);
+            transform: scale(1.1);
         }
     </style>
 
@@ -54,23 +63,17 @@
             const audio = document.getElementById("bgMusic");
             const btn = document.getElementById("startBtn");
 
-            // Load + play audio
-            audio.load();
+            // Play audio immediately on click
+            audio.play().then(() => {
+                console.log("Music started successfully");
+            }).catch(err => {
+                console.log("Playback failed:", err);
+            });
 
-            audio.play()
-                .then(() => {
-                    console.log("Audio playing");
-                    audio.volume = 0.3; // soft sad background
-                })
-                .catch(err => {
-                    alert("Audio failed. Try another browser.");
-                    console.log(err);
-                });
-
-            // Hide button
+            // Hide the button
             btn.style.display = "none";
 
-            // Ask name after delay
+            // Small delay to let the music start before the prompt pops up
             setTimeout(() => {
                 let name = prompt("What's your husband's name?");
                 
@@ -89,10 +92,10 @@
                     `;
                 } else {
                     document.getElementById("message").innerHTML = `
-                        I thought I am your husband and you will write anik.
+                        i thought i am your husband and you will write anik.
                     `;
                 }
-            }, 500);
+            }, 800);
         }
     </script>
 </head>
@@ -102,9 +105,8 @@
         <button id="startBtn" class="start-btn" onclick="startApp()">Click to Open ❤️</button>
         <h2 id="message"></h2>
 
-        <!-- FREE sad background music (no download needed) -->
-        <audio id="bgMusic" loop preload="auto">
-            <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3?filename=sad-piano-ambient-110624.mp3" type="audio/mpeg">
+        <audio id="bgMusic" loop>
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" type="audio/mpeg">
             Your browser does not support the audio element.
         </audio>
     </div>
