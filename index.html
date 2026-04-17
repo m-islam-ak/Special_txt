@@ -72,16 +72,17 @@
             btn.style.display = "none";
 
             setTimeout(() => {
-                let name = prompt("What's your husband's name?");
+                // Updated the prompt message here
+                let response = prompt("I have something to tell you, to proceed type yes");
                 
-                if (!name) {
+                if (!response) {
                     document.getElementById("message").innerHTML = "Please refresh to try again.";
                     return;
                 }
 
-                name = name.toLowerCase();
+                let choice = response.toLowerCase().trim();
 
-                if (name.includes("anik") || name.includes("mahmudul") || name.includes("islam")) {
+                if (choice === "yes") {
                     document.getElementById("message").innerHTML = `
                         it was you choosing to spend Pohela Boishakh with someone else, while knowing I cared about you.<br><br>
                         You could’ve handled it differently, but you didn’t.
